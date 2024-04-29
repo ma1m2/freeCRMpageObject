@@ -30,7 +30,7 @@ public class TestBase {
     public static void init(){
         String browserName = prop.getProperty("browser");
         if(browserName.equalsIgnoreCase("chrome")){
-            WebDriverManager.chromedriver().setup();
+            WebDriverManager.chromedriver().clearDriverCache().setup();
             driver = new ChromeDriver();
         }else if (browserName.equalsIgnoreCase("FF")){
             WebDriverManager.firefoxdriver().setup();

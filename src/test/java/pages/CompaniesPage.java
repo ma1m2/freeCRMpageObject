@@ -5,18 +5,18 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-public class ForgotPasswordPage extends TestBase {
+public class CompaniesPage extends TestBase {
     //Page Factory - OR(object repository):
-    @FindBy(tagName = "h2")
-    WebElement forgotMyPassword;
+    @FindBy(xpath = "//span[@class='selectable '][text()='Companies']")
+    WebElement labelCompanies;
 
     //Initialisation of Page Objects:
-    public ForgotPasswordPage() {
+    public CompaniesPage() {
         PageFactory.initElements(driver, this);
     }
 
     //Actions:
-    public boolean isForgotMyPasswordLabel(){
-        return forgotMyPassword.isDisplayed();
+    public String verifyTextContactsLable(){
+        return labelCompanies.getText();
     }
 }

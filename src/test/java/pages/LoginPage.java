@@ -51,6 +51,4 @@ public class LoginPage extends TestBase {
         return new ForgotPasswordPage();
     }
 
-
-
 }
