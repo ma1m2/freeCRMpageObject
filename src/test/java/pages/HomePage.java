@@ -2,13 +2,14 @@ package pages;
 
 import base.TestBase;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 public class HomePage extends TestBase {
     //Page Factory - OR(object repository):
     @FindBy(css = "div.header.item")
-    WebElement logo; //css = "div.header.item"
+    WebElement logo;
     @FindBy(className = "user-display")
     WebElement usernameLabel; //div/span[text()='CLIENT Sveta'] //css = "span.user-display"
     @FindBy(id = "main-nav")
@@ -19,6 +20,8 @@ public class HomePage extends TestBase {
     WebElement calendarLink;
     @FindBy(xpath = "//a/span[contains(text(),'Contacts')]")
     WebElement contactsLink;//span[@class='item-text'][text()='Contacts']
+    @FindBy(xpath = "(//i[@class='plus inverted icon'])[2]")
+    WebElement addContactsIcon;
     @FindBy(xpath = "//a/span[contains(text(),'Companies')]")
     WebElement companiesLink;//span[@class='item-text'][text()='Companies']
     @FindBy(xpath = "//a/span[contains(text(),'Deals')]")
@@ -65,6 +68,15 @@ public class HomePage extends TestBase {
     public ContactsPage clickOnContactsLink(){
         contactsLink.click();
         return new ContactsPage();
+    }
+
+    public CreateNewContactPage clickOnAddContactsIcon() throws InterruptedException {
+        Actions action = new Actions(driver);
+        action.moveToElement(sideMenu).build().perform();
+        Thread.sleep(2000);
+        addContactsIcon.click();
+        Thread.sleep(2000);
+        return new CreateNewContactPage();
     }
 
     public CompaniesPage clickOnCompaniesLink(){
