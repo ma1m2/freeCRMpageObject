@@ -13,8 +13,8 @@ import java.time.Duration;
 import java.util.Properties;
 
 public class TestBase {
-    protected static WebDriver driver;
-    protected static Properties prop;
+    public static WebDriver driver;
+    public static Properties prop;
     private static WebDriver original;
 
     public TestBase() {

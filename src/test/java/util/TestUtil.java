@@ -1,13 +1,18 @@
 package util;
 
 
+import org.apache.commons.io.FileUtils;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
 
 import java.io.*;
 import java.util.Arrays;
 import java.util.Properties;
 import java.util.Set;
+
+import static base.TestBase.driver;
 
 public class TestUtil {
 
@@ -18,12 +23,11 @@ public class TestUtil {
     public static String PROP_NEW_FILE_PATH = "/src/test/resources/config/new.properties";
 
     private static XSSFWorkbook wb;
-    private static XSSFSheet sheet;
 
     public static Object[][] getTestData(String sheetName){
         FileInputStream fis = null;
         try {
-            fis = new FileInputStream(new File(TESTDATA_SHEET_PATH));
+            fis = new FileInputStream(TESTDATA_SHEET_PATH);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
@@ -34,7 +38,7 @@ public class TestUtil {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        sheet = wb.getSheet(sheetName);
+        XSSFSheet sheet = wb.getSheet(sheetName);
         int lastRowNum = sheet.getLastRowNum();
         int lastCellNum = sheet.getRow(0).getLastCellNum();
 
@@ -45,7 +49,7 @@ public class TestUtil {
                 data[i][j] = sheet.getRow(i + 1).getCell(j).toString();
                 System.out.print(i + " " + j + " " + data[i][j] + "\t");
             }
-            System.out.println("");
+            System.out.println();
         }
         System.out.println(Arrays.deepToString(data));
         return data;
@@ -53,13 +57,11 @@ public class TestUtil {
 
     public static String getCurrentDir(){
         File currentDir = new File(".");
-        String path = currentDir.getAbsolutePath();
-        return  path;
+        return currentDir.getAbsolutePath();
     }
 
     public static String getUserDir(){
-        String path = System.getProperty("user.dir");
-        return  path;
+        return System.getProperty("user.dir");
     }
 
     public static void readCsvFile(){
@@ -91,8 +93,6 @@ public class TestUtil {
             FileOutputStream fos = new FileOutputStream (PROP_NEW_FILE_PATH);
             prop.store(fos, "Write new properties!");
             fos.close();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -103,8 +103,6 @@ public class TestUtil {
             FileInputStream fis = new FileInputStream(PROP_NEW_FILE_PATH);
             prop.load(fis);
             fis.close();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -116,6 +114,12 @@ public class TestUtil {
         for (String key : keys){
             System.out.println(key + " " + prop.getProperty(key));
         }
+    }
+
+    public static void takeScreenshotAtEndOfTest() throws IOException {
+        File scrFile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
+        String currentDir = System.getProperty("user.dir");
+        FileUtils.copyFile(scrFile, new File(currentDir + "/screenshots/" + System.currentTimeMillis() + ".png"));
     }
 
 }

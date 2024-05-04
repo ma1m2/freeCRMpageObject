@@ -6,6 +6,10 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.events.WebDriverListener;
 
+import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+
 public class Listener extends TestBase implements WebDriverListener {
 
     public void beforeTo(WebDriver.Navigation navigation, String url) {
@@ -30,6 +34,24 @@ public class Listener extends TestBase implements WebDriverListener {
 
     public void afterFindElement(WebDriver driver, By by, WebElement result){
         System.out.println("Found Element By : " + by.toString());
+    }
+
+/*    public void onException(Throwable error, WebDriver driver) {
+        System.out.println("Exception occured: " + error);
+        try {
+            TestUtil.takeScreenshotAtEndOfTest();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }*/
+
+    public void onError(Object target, Method method, Object[] args, InvocationTargetException error) {
+        System.out.println("Exception occured: " + error);
+        try {
+            TestUtil.takeScreenshotAtEndOfTest();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
 }
