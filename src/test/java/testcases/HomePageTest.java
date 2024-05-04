@@ -1,4 +1,4 @@
-package tests;
+package testcases;
 
 import base.TestBase;
 import org.testng.Assert;
@@ -30,6 +30,12 @@ public class HomePageTest extends TestBase {
     @Test(priority = 1)
     public void isLogoTest(){
         boolean flag = homePage.isDisplaiedLogo();
+        Assert.assertTrue(flag);
+    }
+
+    @Test(priority = 1)
+    public void isHomeLabelTest(){
+        boolean flag = homePage.isDisplaiedHomeLabel();
         Assert.assertTrue(flag);
     }
 

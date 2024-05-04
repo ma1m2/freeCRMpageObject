@@ -4,10 +4,9 @@ import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
-import org.testng.annotations.Test;
+import org.openqa.selenium.support.events.EventFiringDecorator;
 import util.TestUtil;
-
-import java.io.File;
+import util.Listener;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.time.Duration;
@@ -16,12 +15,14 @@ import java.util.Properties;
 public class TestBase {
     protected static WebDriver driver;
     protected static Properties prop;
+    private static WebDriver original;
 
     public TestBase() {
         prop = new Properties();
         try {
             FileInputStream fis = new FileInputStream("./src/test/resources/config/config.properties");
             prop.load(fis);
+            fis.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -31,11 +32,18 @@ public class TestBase {
         String browserName = prop.getProperty("browser");
         if(browserName.equalsIgnoreCase("chrome")){
             WebDriverManager.chromedriver().clearDriverCache().setup();
-            driver = new ChromeDriver();
+            original = new ChromeDriver();
         }else if (browserName.equalsIgnoreCase("FF")){
             WebDriverManager.firefoxdriver().setup();
-            driver = new FirefoxDriver();
+            original = new FirefoxDriver();
         }
+
+        //Create instance of Listener Class
+        Listener listener = new Listener();
+        //Pass listener to constructor
+        EventFiringDecorator<WebDriver> decorator = new EventFiringDecorator<>(listener);
+        driver = decorator.decorate(original);
+
         driver.manage().window().maximize();
         driver.manage().deleteAllCookies();
         driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(TestUtil.PAGE_LOAD_TIMEOUT));
@@ -45,7 +53,7 @@ public class TestBase {
 
 
     //@Test
-    public void getProp() throws InterruptedException {
+/*    public void getProp() throws InterruptedException {
         File currentFile = new File(".");
         System.out.println(prop.getProperty("browser"));
         System.out.println("Absolute Path to project" + System.getProperty("user.dir"));
@@ -54,6 +62,6 @@ public class TestBase {
         //driver.get(prop.getProperty("url"));
         Thread.sleep(2000);
         driver.quit();
-    }
+    }*/
 
 }

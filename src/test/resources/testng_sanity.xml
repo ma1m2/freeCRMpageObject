@@ -3,8 +3,8 @@
 <suite name="FREE CRM Application Test Automation Test Suite">
     <test name="Free CRM App Test Cases">
         <classes>
-            <class name="tests.LoginPageTest"/>
-            <class name="tests.HomePageTest"/>
+            <class name="testcases.LoginPageTest"/>
+            <class name="testcases.HomePageTest"/>
         </classes>
     </test>
 </suite>

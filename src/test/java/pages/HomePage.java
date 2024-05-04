@@ -10,6 +10,8 @@ public class HomePage extends TestBase {
     //Page Factory - OR(object repository):
     @FindBy(css = "div.header.item")
     WebElement logo;
+    @FindBy(xpath = "//b[text()='Home']")
+    WebElement homeLabel;
     @FindBy(className = "user-display")
     WebElement usernameLabel; //div/span[text()='CLIENT Sveta'] //css = "span.user-display"
     @FindBy(id = "main-nav")
@@ -53,6 +55,10 @@ public class HomePage extends TestBase {
         return logo.isDisplayed();
     }
 
+    public boolean isDisplaiedHomeLabel(){
+        return homeLabel.isDisplayed();
+    }
+
     public String validateTextUserName(){
         return usernameLabel.getText();
     }
@@ -79,10 +85,17 @@ public class HomePage extends TestBase {
         return new CreateNewContactPage();
     }
 
+    public CreateNewContactPage goToCreateNewContactPage() {
+        //driver.get("https://ui.cogmento.com/contacts/new");
+        driver.get(prop.getProperty("urlContactNew"));
+        return new CreateNewContactPage();
+    }
+
     public CompaniesPage clickOnCompaniesLink(){
         companiesLink.click();
         return new CompaniesPage();
     }
+
     public DealsPage clickOnDealsLink(){
         dealsLink.click();
         return new DealsPage();

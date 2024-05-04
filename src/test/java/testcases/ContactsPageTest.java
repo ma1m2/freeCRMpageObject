@@ -1,4 +1,4 @@
-package tests;
+package testcases;
 
 import base.TestBase;
 import org.testng.Assert;

@@ -15,6 +15,9 @@ public class CreateNewContactPage extends TestBase {
     WebElement firstName;
     @FindBy(name = "last_name")
     WebElement lastName;
+    //@FindBy(name = "company")
+    @FindBy(xpath = "//*[@name='company']")
+    WebElement companyField;
     @FindBy(name = "//span[text()='New']")
     WebElement status; //*[@name='status']/span[text()='New']
     @FindBy(css = "i.checkmark.icon")
@@ -36,11 +39,14 @@ public class CreateNewContactPage extends TestBase {
         return createNewContactLabel.isDisplayed();
     }
 
-    public CreatedContactPage createNewContact(String ftName, String ltName, String email){
+    public CreatedContactPage createNewContact(String ftName, String ltName, String email) throws InterruptedException {
         firstName.sendKeys(ftName);
         lastName.sendKeys(ltName);
         emailChechmarkIcon.click();
         emailField.sendKeys(email);
+        companyField.click();
+        Thread.sleep(3000);
+        //companyField.sendKeys(company);
         doNotEmailToggle.click();
         saveBtn.click();
         return new CreatedContactPage();
