@@ -36,15 +36,6 @@ public class Listener extends TestBase implements WebDriverListener {
         System.out.println("Found Element By : " + by.toString());
     }
 
-/*    public void onException(Throwable error, WebDriver driver) {
-        System.out.println("Exception occured: " + error);
-        try {
-            TestUtil.takeScreenshotAtEndOfTest();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }*/
-
     public void onError(Object target, Method method, Object[] args, InvocationTargetException error) {
         System.out.println("Exception occured: " + error);
         try {

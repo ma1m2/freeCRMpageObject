@@ -5,6 +5,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.events.EventFiringDecorator;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import util.TestUtil;
 import util.Listener;
 import java.io.FileInputStream;
@@ -44,6 +45,7 @@ public class TestBase {
         EventFiringDecorator<WebDriver> decorator = new EventFiringDecorator<>(listener);
         driver = decorator.decorate(original);
 
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         driver.manage().window().maximize();
         driver.manage().deleteAllCookies();
         driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(TestUtil.PAGE_LOAD_TIMEOUT));

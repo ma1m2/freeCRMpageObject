@@ -9,25 +9,25 @@ import org.openqa.selenium.support.PageFactory;
 public class HomePage extends TestBase {
     //Page Factory - OR(object repository):
     @FindBy(css = "div.header.item")
-    WebElement logo;
+    private WebElement logo;
     @FindBy(xpath = "//b[text()='Home']")
-    WebElement homeLabel;
+    private WebElement homeLabel;
     @FindBy(className = "user-display")
-    WebElement usernameLabel; //div/span[text()='CLIENT Sveta'] //css = "span.user-display"
+    private WebElement usernameLabel; //div/span[text()='CLIENT Sveta'] //css = "span.user-display"
     @FindBy(id = "main-nav")
-    WebElement sideMenu;//div[@id='main-nav']
+    private WebElement sideMenu;//div[@id='main-nav']
     @FindBy(xpath = "//a/span[contains(text(),'Home')]")
-    WebElement homeLink; //a/span[contains(text(),'Home')]
+    private WebElement homeLink; //a/span[contains(text(),'Home')]
     @FindBy(xpath = "//a/span[contains(text(),'Calendar')]")
-    WebElement calendarLink;
+    private WebElement calendarLink;
     @FindBy(xpath = "//a/span[contains(text(),'Contacts')]")
-    WebElement contactsLink;//span[@class='item-text'][text()='Contacts']
+    private WebElement contactsLink;//span[@class='item-text'][text()='Contacts']
     @FindBy(xpath = "(//i[@class='plus inverted icon'])[2]")
-    WebElement addContactsIcon;
+    private WebElement addContactsIcon;
     @FindBy(xpath = "//a/span[contains(text(),'Companies')]")
-    WebElement companiesLink;//span[@class='item-text'][text()='Companies']
+    private WebElement companiesLink;//span[@class='item-text'][text()='Companies']
     @FindBy(xpath = "//a/span[contains(text(),'Deals')]")
-    WebElement dealsLink;//span[@class='item-text'][text()='Deals']
+    private WebElement dealsLink;//span[@class='item-text'][text()='Deals']
     @FindBy(xpath = "//a/span[contains(text(),'Tasks')]")
     WebElement tasksLink;//span[@class='item-text'][text()='Tasks']
     @FindBy(xpath = "//a/span[contains(text(),'Cases')]")
